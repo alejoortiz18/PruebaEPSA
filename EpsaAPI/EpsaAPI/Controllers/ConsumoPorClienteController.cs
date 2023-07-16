@@ -7,7 +7,7 @@ using System.Web.Http;
 
 namespace EpsaAPI.Controllers
 {
-    public class ConsumoPorClienteDefaultController : ApiController
+    public class ConsumoPorClienteController : ApiController
     {
     }
 }

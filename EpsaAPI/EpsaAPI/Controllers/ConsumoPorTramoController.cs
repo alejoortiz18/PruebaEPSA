@@ -1,5 +1,7 @@
 ﻿using EpsaBLL;
 using EpsaEntities.ModelDto;
+using Microsoft.Ajax.Utilities;
+using Swagger.Net;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,8 +28,12 @@ namespace EpsaAPI.Controllers
         /// <summary>
         /// <br/>Control de Cambios-----------------
         /// <br/>EJERCICIO:    Request 1
-        /// <br/> PLANTEAMIENTO: Se envía una fecha inicial y una final (yyyy-MM-dd) y se debe de responder con una historia por cada tramo, que contenga el consumo, 
-        /// <br/>perdidas y costo por el consumo.Esto permite dar una contextualización al cliente de como han estado los datos en ese periodo de tiempo.
+        /// <br/> PLANTEAMIENTO: Histórico Consumos por Cliente (Residencial, Comercial, Industrial)
+        ///<br/>Se envía una fecha inicial y una final(yyyy-MM-dd)
+        ///<br/>y se debe de responder con una historia por cada tramo, 
+        ///<br/>que contenga el consumo, perdidas y costo por el consumo.
+        ///<br/>Esto permite dar una contextualización al cliente de como
+        ///<br/>han estado los datos en ese periodo de tiempo.
         /// <br/>Creado:         Julio. 16/2023
         /// <br/>Modificado:     
         /// <br/>Version:        1.0
@@ -44,12 +50,12 @@ namespace EpsaAPI.Controllers
         /// <br/>René Alejandro Ortiz Gaviria
         /// <br/></Author>
         /// <br/></summary>
-        [ResponseType(typeof(ObtenerHistoriaConsumoDto))]
+        [ResponseType(typeof(ObtenerHistorialTramosDto))]
         [Route("ConsumoPorTramo")]
         public IHttpActionResult ConsumoPorTramo(FechasDto date)
         {
            
-            List<ObtenerHistoriaConsumoDto> ohc = new List<ObtenerHistoriaConsumoDto>();
+            List<ObtenerHistorialTramosDto> ohc = new List<ObtenerHistorialTramosDto>();
             if (!ModelState.IsValid)
             {
                 var msn = ModelState.Values.FirstOrDefault().Errors.FirstOrDefault().ErrorMessage;

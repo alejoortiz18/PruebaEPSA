@@ -25,7 +25,7 @@ namespace EpsaBLL
         /// <br/>Autor:          RAOG(mi empresa) - René Alejandro Ortiz Gaviria
         /// <br/>Sistema:        EpsaAPI Bussines
         /// <br/>Assemblies:     EpsaAPI.EpsaBLL.Bussines
-        /// <br/>Description:    Metodo para Obtener Historial de consumo de todos los tramos filtrado por fecha inicial y fecha final
+        /// <br/>Description:    Metodo para Obtener Historial de consumo por Tramos filtrado por fecha inicial y fecha final
         /// <br/><param name="fecha">Param: objeto FechasDto</param>
         /// <br/><returns>Retorna: List ObtenerHistoriaConsumoDto</returns>
         /// <br/><exception cref="Exception">Exception: se ejecuta un throw en caso de tener alguna excepción </exception>
@@ -35,9 +35,9 @@ namespace EpsaBLL
         /// <br/>René Alejandro Ortiz Gaviria
         /// <br/></Author>
         /// <br/></summary>
-        public List<ObtenerHistoriaConsumoDto> ObtenerHistoriaConsumo(FechasDto fecha)
+        public List<ObtenerHistorialTramosDto> ObtenerHistoriaConsumo(FechasDto fecha)
         {
-            List<ObtenerHistoriaConsumoDto> result = _cptDal.ObtenerHistoriaConsumo(fecha);
+            List<ObtenerHistorialTramosDto> result = _cptDal.ObtenerHistoria(fecha);
             return result;
         }
         #endregion

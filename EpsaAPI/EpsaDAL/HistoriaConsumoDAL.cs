@@ -1,25 +1,25 @@
-﻿using EpsaEntities;
-using EpsaEntities.ModelDto;
-using System.Data.SqlClient;
-using System.Data;
+﻿using EpsaEntities.ModelDto;
 using System;
 using System.Collections.Generic;
-using EpsaEntities.Models;
+using System.Data.SqlClient;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using EpsaEntities;
 
 namespace EpsaDAL
 {
-
-    public class ConsumoPorTramoDAL
+    public class HistoriaConsumoDAL
     {
         private string _context;
 
-        public ConsumoPorTramoDAL()
+        public HistoriaConsumoDAL()
         {
             _context = DBContext.connectionString;
         }
 
         #region METODOS PARA CONSULTAR 
-
         /// <summary>
         /// <br/>Control de Cambios-----------------
         /// <br/>Compania:       
@@ -29,7 +29,7 @@ namespace EpsaDAL
         /// <br/>Autor:          RAOG(mi empresa) - René Alejandro Ortiz Gaviria
         /// <br/>Sistema:        EpsaAPI DALL
         /// <br/>Assemblies:     EpsaAPI.EpsaDAL.Datos
-        /// <br/>Description:    Metodo para Obtener Historial de consumo por Tramos filtrado por fecha inicial y fecha final
+        /// <br/>Description:    Metodo para Obtener Historial de consumo de todos los tramos filtrado por fecha inicial y fecha final
         /// <br/><param name="fecha">Param: objeto FechasDto</param>
         /// <br/><returns>Retorna: List ObtenerHistoriaConsumoDto</returns>
         /// <br/><exception cref="Exception">Exception: se ejecuta un throw en caso de tener alguna excepción </exception>
@@ -39,9 +39,9 @@ namespace EpsaDAL
         /// <br/>René Alejandro Ortiz Gaviria
         /// <br/></Author>
         /// <br/></summary>
-        public List<ObtenerHistorialTramosDto> ObtenerHistoria(FechasDto fecha)
+        public List<ObtenerHistoriaConsumoDto> ObtenerHistoriaConsumo(FechasDto fecha)
         {
-           List<ObtenerHistorialTramosDto> oht = new List<ObtenerHistorialTramosDto>();
+            List<ObtenerHistoriaConsumoDto> ohc = new List<ObtenerHistoriaConsumoDto>();
 
             try
             {
@@ -49,27 +49,33 @@ namespace EpsaDAL
                 {
                     connection.Open();
 
-                    using (SqlCommand command = new SqlCommand("ObtenerHistorialTramos", connection))
+                    using (SqlCommand command = new SqlCommand("ObtenerHistoriaConsumo", connection))
                     {
-                       
+
                         command.CommandType = CommandType.StoredProcedure;
                         // Agregar parámetros si es necesario
                         command.Parameters.AddWithValue("@FechaInicio", fecha.FechaInicial);
                         command.Parameters.AddWithValue("@FechaFin", fecha.FechaFinal);
 
-                        ObtenerHistorialTramosDto historia = new ObtenerHistorialTramosDto();
+                        ObtenerHistoriaConsumoDto historiaConsumo = new ObtenerHistoriaConsumoDto();
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
                             while (reader.Read())
                             {
-                                historia.IdTramo  = (int)reader["IdTramo"];
-                                historia.Nombre  = Convert.ToString(reader["Nombre"]);
-                                historia.Fecha  = Convert.ToDateTime(reader["Fecha"]);
-                                historia.Consumo  = Convert.ToInt32(reader["Consumo"]);
-                                historia.Perdidas = (double)reader["Perdidas"];
-                                historia.Costo = (double)reader["Costo"];
 
-                                oht.Add(historia);
+                                historiaConsumo.Tramo = reader["Tramo"].ToString();
+                                historiaConsumo.Fecha = Convert.ToDateTime(reader["Fecha"]);
+                                historiaConsumo.Consumo_Residencial = Convert.ToInt32(reader["Consumo_Residencial"]);
+                                historiaConsumo.Consumo_Comercial = Convert.ToInt32(reader["Consumo_Comercial"]);
+                                historiaConsumo.Consumo_Industrial = (int)reader["Consumo_Industrial"];
+                                historiaConsumo.Perdida_Residencial = (double)reader["Perdidas_Residencial"];
+                                historiaConsumo.Perdida_Comercial = (double)reader["Perdidas_Comercial"];
+                                historiaConsumo.Perdida_Industrial = Convert.ToDouble(reader["Perdidas_Industrial"]);
+                                historiaConsumo.Costo_Consumo_Residencial = (double)reader["Costo_Consumo_Residencial"];
+                                historiaConsumo.Costo_Consumo_Comercial = (double)reader["Costo_Consumo_Comercial"];
+                                historiaConsumo.Costo_Consumo_Industrial = (double)reader["Costo_Consumo_Industrial"];
+
+                                ohc.Add(historiaConsumo);
                             }
                         }
                     }
@@ -79,9 +85,8 @@ namespace EpsaDAL
             {
                 throw;
             }
-            return oht;
+            return ohc;
         }
         #endregion
-
     }
 }
