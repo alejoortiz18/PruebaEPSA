@@ -47,8 +47,8 @@ namespace EpsaAPI.Controllers
         /// <br/></Author>
         /// <br/></summary>
         [ResponseType(typeof(ObtenerHistoriaConsumoDto))]
-        [Route("ConsumoPorTramo")]
-        public IHttpActionResult ConsumoPorTramo(FechasDto date)
+        [Route("ConsumoPorCliente")]
+        public IHttpActionResult ConsumoPorCliente(FechasDto date)
         {
 
             List<ObtenerHistoriaConsumoDto> ohc = new List<ObtenerHistoriaConsumoDto>();
