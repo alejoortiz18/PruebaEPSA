@@ -29,9 +29,9 @@ namespace EpsaDAL
         /// <br/>Autor:          RAOG(mi empresa) - René Alejandro Ortiz Gaviria
         /// <br/>Sistema:        EpsaAPI DALL
         /// <br/>Assemblies:     EpsaAPI.EpsaDAL.Datos
-        /// <br/>Description:    Metodo para Obtener Historial de consumo por Tramos filtrado por fecha inicial y fecha final
+        /// <br/>Description:    Metodo para Obtener Historial por Tramos filtrado por fecha inicial y fecha final
         /// <br/><param name="fecha">Param: objeto FechasDto</param>
-        /// <br/><returns>Retorna: List ObtenerHistoriaConsumoDto</returns>
+        /// <br/><returns>Retorna: List ObtenerHistorialTramosDto</returns>
         /// <br/><exception cref="Exception">Exception: se ejecuta un throw en caso de tener alguna excepción </exception>
         /// <br/> Historial--------------------------
         /// <br/>Julio. 16/2023 - RAOG Version: 1.0. Creación Clase ConsumoPorTramoDAL

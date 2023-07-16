@@ -10,11 +10,11 @@ using EpsaEntities;
 
 namespace EpsaDAL
 {
-    public class HistoriaConsumoDAL
+    public class HistoriaConsumoPorClienteDAL
     {
         private string _context;
 
-        public HistoriaConsumoDAL()
+        public HistoriaConsumoPorClienteDAL()
         {
             _context = DBContext.connectionString;
         }
@@ -29,17 +29,17 @@ namespace EpsaDAL
         /// <br/>Autor:          RAOG(mi empresa) - René Alejandro Ortiz Gaviria
         /// <br/>Sistema:        EpsaAPI DALL
         /// <br/>Assemblies:     EpsaAPI.EpsaDAL.Datos
-        /// <br/>Description:    Metodo para Obtener Historial de consumo de todos los tramos filtrado por fecha inicial y fecha final
+        /// <br/>Description:    Metodo para Obtener Historial de consumo por Tramos filtrado por fecha inicial y fecha final
         /// <br/><param name="fecha">Param: objeto FechasDto</param>
         /// <br/><returns>Retorna: List ObtenerHistoriaConsumoDto</returns>
         /// <br/><exception cref="Exception">Exception: se ejecuta un throw en caso de tener alguna excepción </exception>
         /// <br/> Historial--------------------------
-        /// <br/>Julio. 16/2023 - RAOG Version: 1.0. Creación Clase ConsumoPorTramoDAL
+        /// <br/>Julio. 16/2023 - RAOG Version: 1.0. Creación del método ObtenerHistoria
         /// <br/><Author>
         /// <br/>René Alejandro Ortiz Gaviria
         /// <br/></Author>
         /// <br/></summary>
-        public List<ObtenerHistoriaConsumoDto> ObtenerHistoriaConsumo(FechasDto fecha)
+        public List<ObtenerHistoriaConsumoDto> ObtenerHistoria(FechasDto fecha)
         {
             List<ObtenerHistoriaConsumoDto> ohc = new List<ObtenerHistoriaConsumoDto>();
 

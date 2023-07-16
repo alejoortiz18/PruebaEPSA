@@ -28,21 +28,19 @@ namespace EpsaAPI.Controllers
         /// <summary>
         /// <br/>Control de Cambios-----------------
         /// <br/>EJERCICIO:    Request 1
-        /// <br/> PLANTEAMIENTO: Histórico Consumos por Cliente (Residencial, Comercial, Industrial)
-        ///<br/>Se envía una fecha inicial y una final(yyyy-MM-dd)
-        ///<br/>y se debe de responder con una historia por cada tramo, 
-        ///<br/>que contenga el consumo, perdidas y costo por el consumo.
-        ///<br/>Esto permite dar una contextualización al cliente de como
-        ///<br/>han estado los datos en ese periodo de tiempo.
+        /// <br/> PLANTEAMIENTO: Histórico Consumos por Tramos
+        ///<br/>--Se envía una fecha inicial y una final (yyyy-MM-dd) y se debe de responder con una historia por cada tramo,
+        ///<br/>--que contenga el consumo, perdidas y costo por el consumo. 
+        ///<br/>--Esto permite dar una contextualización al cliente de como han estado los datos en ese periodo de tiempo.
         /// <br/>Creado:         Julio. 16/2023
         /// <br/>Modificado:     
         /// <br/>Version:        1.0
         /// <br/>Autor:          RAOG(mi empresa) - René Alejandro Ortiz Gaviria
         /// <br/>Sistema:        EpsaAPI Bussines
         /// <br/>Assemblies:     EpsaAPI.EpsaBLL.Bussines
-        /// <br/>Description:    Metodo para Obtener Historial de consumo de todos los tramos filtrado por fecha inicial y fecha final
+        /// <br/>Description:    Metodo para Obtener Historial de tramos filtrado por fecha inicial y fecha final
         /// <br/><param name="fecha">Param: objeto FechasDto</param>
-        /// <br/><returns>Retorna: List ObtenerHistoriaConsumoDto</returns>
+        /// <br/><returns>Retorna: List ObtenerHistorialTramosDto</returns>
         /// <br/><exception cref="Exception">Exception: se ejecuta un throw en caso de tener alguna excepción </exception>
         /// <br/> Historial--------------------------
         /// <br/>Julio. 16/2023 - RAOG Version: 1.0. Creación Clase ConsumoPorTramoDAL
@@ -61,7 +59,7 @@ namespace EpsaAPI.Controllers
                 var msn = ModelState.Values.FirstOrDefault().Errors.FirstOrDefault().ErrorMessage;
                 return Ok(msn);
             }
-            ohc = _consumoPorTramoBLL.ObtenerHistoriaConsumo(date);
+            ohc = _consumoPorTramoBLL.ObtenerHistoria(date);
             return Ok(ohc);
         }
         #endregion
